@@ -54,7 +54,7 @@ function init() {
 		          var response = JSON.parse(e.data)
                           switch(response["mode"]) {
   				case proto["message"]:
-					var date = new Date();
+					var date = new Date(response["timestamp"] * 1000);
 					localdate = new Date(date.getTime() - date.getTimezoneOffset()*60*1000);
 					var time = localdate.toISOString().substr(11, 8);
 					if (response["username"] == myName) {
