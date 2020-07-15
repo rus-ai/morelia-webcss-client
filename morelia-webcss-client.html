@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>qt-chat-client-plain</title>
+<title>MoreliaTalk Web</title>
 <script type="text/javascript">
 
 function getRandomInt(max) {
@@ -43,13 +43,6 @@ function register_user(username, password) {
 
 function init() {
 	socket = new WebSocket("ws://" + socket_addr + "/ws")
-        myName = prompt("Имя пользователя:", "Пользователь"+getRandomInt(100000));
-        if (myName == null) { myName = "Пользователь"+getRandomInt(100000)}
-        myPassword = prompt("Пароль:", "123456");
-        if (myPassword == null) { myPassword = "123456"}
-	socket.onopen = function() {
-		        register_user(myName, myPassword)
-	};
 	socket.onmessage = function(e) {
 		          var response = JSON.parse(e.data)
                           switch(response["mode"]) {
@@ -102,6 +95,15 @@ function init() {
 	socket.onerror = function(e) {
 	  console.log(e)
 	};
+
+        myName = prompt("Имя пользователя:", "Пользователь"+getRandomInt(100000));
+        if (myName == null) { myName = "Пользователь"+getRandomInt(100000)}
+        myPassword = prompt("Пароль:", "123456");
+        if (myPassword == null) { myPassword = "123456"}
+	socket.onopen = function() {
+		        register_user(myName, myPassword)
+	};
+
 }
 
 function onSubmit() {
